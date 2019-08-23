@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+const { Promise } = require('bluebird');
+const HoverDomain = require('../lib/hoverdomain');
+const { sprintf } = require('sprintf-js');
+
+let program = require('commander');
+
+async function main() {
+  program.parse(process.argv);
+
+  Promise.each(program.args, async arg => {
+    let domain = new HoverDomain(arg);
+  
+    let { results } = await domain.list();
+
+    if (arg.match(/\./)) {
+      results = results.filter(result => result.domain === arg);
+    }
+
+    results.forEach(result => {
+      console.log(sprintf('%-50s %6s', result.domain, result.price));
+    });
+
+    if (!results.length) {
+      console.log('Not available or no matches.');
+    }
+  })
+}
+
+main();

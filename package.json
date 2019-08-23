@@ -1,0 +1,18 @@
+{
+  "name": "hoverdomain",
+  "version": "1.0.0",
+  "description": "Hover Domain Finder",
+  "main": "bin/hoverdomain",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Scott Tadman <github@tadman.ca>",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.5",
+    "commander": "^3.0.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "sprintf-js": "^1.1.2"
+  }
+}
