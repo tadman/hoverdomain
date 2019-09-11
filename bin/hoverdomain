@@ -23,7 +23,7 @@ async function main() {
     });
 
     if (!results.length) {
-      console.log('Not available or no matches.');
+      console.log(`${arg}: Not available or no matches.`);
     }
   })
 }
