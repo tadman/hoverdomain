@@ -9,10 +9,10 @@
   "author": "Scott Tadman <github@tadman.ca>",
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^3.5.5",
-    "commander": "^3.0.0",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.4",
+    "bluebird": "^3.7.2",
+    "commander": "^7.2.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
     "sprintf-js": "^1.1.2"
   }
 }

@@ -4,22 +4,31 @@ const { Promise } = require('bluebird');
 const HoverDomain = require('../lib/hoverdomain');
 const { sprintf } = require('sprintf-js');
 
-let program = require('commander');
+let program = require('commander')
+  .option('-l, --limit <limit>', 'Set a limit on price', parseInt);
 
 async function main() {
   program.parse(process.argv);
 
+  const limit = program.opts().limit;
+
   Promise.each(program.args, async arg => {
     let domain = new HoverDomain(arg);
-  
+
     let { results } = await domain.list();
 
     if (arg.match(/\./)) {
       results = results.filter(result => result.domain === arg);
     }
 
+    if (limit) {
+      results = results.filter(result =>
+        parseFloat(result.price.replace(/\$/, '').replace(/,/g, '')) < limit
+      );
+    }
+
     results.forEach(result => {
-      console.log(sprintf('%-50s %6s', result.domain, result.price));
+      console.log(sprintf('%-50s %10s', result.domain, result.price));
     });
 
     if (!results.length) {
