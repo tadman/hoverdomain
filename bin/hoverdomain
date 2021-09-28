@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const _ = require('lodash');
 const { Promise } = require('bluebird');
 const HoverDomain = require('../lib/hoverdomain');
 const { sprintf } = require('sprintf-js');
@@ -20,6 +21,9 @@ async function main() {
     if (arg.match(/\./)) {
       results = results.filter(result => result.domain === arg);
     }
+    else {
+      results = results.filter(result => result.domain.split(/\./)[0] == arg);
+    }
 
     if (limit) {
       results = results.filter(result =>
@@ -27,7 +31,7 @@ async function main() {
       );
     }
 
-    results.forEach(result => {
+    _.sortBy(results, 'domain').forEach(result => {
       console.log(sprintf('%-50s %10s', result.domain, result.price));
     });
 
